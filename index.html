@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的實用工具箱</title>
+  <title>我的大耳狗工具箱 🐾</title>
   
   <style>
-    /* 基本設定與深色主題 */
+    /* 基本設定與大耳狗風格色彩 */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -17,51 +17,48 @@
     body {
       display: flex;
       height: 100vh;
-      background-color: #1e1e24; /* 深灰色背景 */
-      color: #ffffff;
+      background-color: #ffffff; 
+      color: #1e1e24; 
     }
 
     /* --- 側邊欄設計 --- */
     .sidebar {
       width: 250px;
-      background-color: #2b2b36;
+      background-color: #e6f7ff; 
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 15px;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.05); 
+      border-radius: 0 15px 15px 0; 
+      position: relative; 
     }
 
     .logo {
       text-align: center;
       padding-bottom: 20px;
-      border-bottom: 1px solid #444;
+      border-bottom: 2px solid #b0e0e6; 
       margin-bottom: 10px;
-      color: #ffcc00;
+      color: #87ceeb; 
+      font-weight: bold;
+      font-size: 1.8rem;
     }
 
     .nav-btn {
       background: none;
-      color: #bbb;
+      color: #555555; 
       border: none;
       text-align: left;
       padding: 15px 20px;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       border-radius: 8px;
       cursor: pointer;
       transition: 0.3s;
-    }
-
-    .nav-btn:hover {
-      background-color: #3f3f4e;
-      color: white;
-    }
-
-    .nav-btn.active {
-      background-color: #5865f2; /* 選擇時的亮藍色 */
-      color: white;
       font-weight: bold;
     }
+
+    .nav-btn:hover { background-color: #ffb6c1; color: #ffffff; }
+    .nav-btn.active { background-color: #ffffff; color: #333333; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
     /* --- 主要內容區設計 --- */
     .content {
@@ -72,155 +69,186 @@
       align-items: center;
       text-align: center;
       overflow-y: auto;
+      background-image: radial-gradient(#f0f8ff 10%, transparent 10%); 
+      background-size: 20px 20px; 
     }
 
     .tool-section {
-      display: none; /* 預設隱藏所有工具 */
-      animation: fadeIn 0.5s ease; /* 簡單的淡入動畫 */
+      display: none; 
+      animation: fadeIn 0.5s ease; 
+      width: 100%; 
+      max-width: 900px;
     }
 
-    .tool-section.active {
-      display: block; /* 只顯示有 active 的工具 */
-    }
+    .tool-section.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- 工具共用樣式 (螢幕與按鈕) --- */
+    .tool-section h1 {
+      color: #87ceeb !important; 
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    /* --- 工具共用樣式 --- */
     .display-screen {
-      background-color: #2b2b36;
+      background-color: #ffffff; 
       padding: 40px;
-      border-radius: 15px;
-      margin: 20px 0;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+      border-radius: 30px; 
+      margin: 20px auto;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+      border: 3px solid #e6f7ff;
+      max-width: 500px; 
     }
 
     .display-screen h2 {
       font-size: 6rem;
       margin: 0;
       letter-spacing: 2px;
-      color: #00ffcc; /* 螢光綠數字 */
+      color: #333333; 
     }
 
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
+    .btn-group { display: flex; justify-content: center; gap: 15px; }
 
     button {
       padding: 12px 25px;
       font-size: 1.2rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 15px; 
       cursor: pointer;
       font-weight: bold;
       transition: 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    button:active {
-      transform: scale(0.95);
-    }
+    button:active { transform: scale(0.95); box-shadow: 0 2px 3px rgba(0,0,0,0.1); }
+    .action-btn { background-color: #87ceeb; color: #1e1e24; }
+    .action-btn:hover { background-color: #5bbcee; }
+    .danger-btn { background-color: #ffb6c1; color: #1e1e24; }
+    .danger-btn:hover { background-color: #ff99aa; }
 
-    .action-btn {
-      background-color: #5865f2;
-      color: white;
-    }
-
-    .action-btn:hover {
-      background-color: #4752c4;
-    }
-
-    .danger-btn {
-      background-color: #ed4245;
-      color: white;
-    }
-
-    .danger-btn:hover {
-      background-color: #c93639;
-    }
-
-    /* --- 番茄鐘模式切換按鈕 --- */
-    .mode-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
+    /* --- 番茄鐘特殊樣式 --- */
+    .mode-tabs { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
     .mode-btn {
-      background-color: #3f3f4e;
-      color: #bbb;
-      padding: 8px 16px;
-      font-size: 1rem;
-      border-radius: 20px; /* 圓角膠囊形狀 */
+      background-color: #ffffff; color: #555555; border: 2px solid #e0f0ff;
+      padding: 8px 16px; font-size: 1rem; border-radius: 20px; box-shadow: none;
+    }
+    .mode-btn:hover { background-color: #ffb6c1; color: #1e1e24; border-color: #ffb6c1; }
+    .mode-btn.active { background-color: #87ceeb; color: #1e1e24; border-color: #87ceeb; }
+
+    .custom-time-input {
+      width: 60px; padding: 5px; border: 2px solid #87ceeb;
+      border-radius: 10px; text-align: center; color: #333333;
+      font-weight: bold; outline: none; font-size: 1rem;
     }
 
-    .mode-btn:hover {
-      background-color: #4f4f62;
-    }
+    /* 報時台與碼錶時鐘大小 */
+    .clock-display { font-size: 6rem !important; }
+    .stopwatch-display { font-size: 5rem !important; } 
 
-    .mode-btn.active {
-      background-color: #00ffcc;
-      color: #1e1e24;
+    /* --- 世界時間特殊樣式 --- */
+    .add-clock-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 20px 0; }
+    .custom-select {
+      padding: 10px; font-size: 1.1rem; border: 2px solid #87ceeb;
+      border-radius: 10px; color: #333; background-color: #fff; outline: none;
     }
+    .world-clocks-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    
+    .world-clock-card {
+      background-color: #ffffff; border-radius: 25px; padding: 20px; width: 220px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 2px solid #e6f7ff;
+      transition: 0.3s; position: relative; 
+    }
+    .world-clock-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(0,0,0,0.1); }
+    
+    .remove-clock-btn {
+      position: absolute; top: 15px; right: 15px; background: transparent; border: none;
+      color: #cccccc; font-size: 1.2rem; width: 20px; height: 20px;
+      box-shadow: none; cursor: pointer; padding: 0; line-height: 1;
+    }
+    .remove-clock-btn:hover { color: #ffb6c1; transform: scale(1.2); }
+    
+    .world-city { font-size: 1.5rem; color: #333333; font-weight: bold; margin-top: 5px; }
+    .world-date { font-size: 0.9rem; color: #777; margin-bottom: 10px; }
+    .world-time { font-size: 2.5rem; color: #333333; font-weight: bold; letter-spacing: 1px; }
 
     /* --- 手機響應式設計 (RWD) --- */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      
+      body { flex-direction: column; }
       .sidebar {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px;
-        height: auto;
+        width: 100%; flex-direction: row; justify-content: space-around;
+        padding: 10px; height: auto; border-radius: 0 0 15px 15px; flex-wrap: wrap; 
       }
-      
-      .logo {
-        display: none; /* 手機版隱藏 Logo */
-      }
-
-      .nav-btn {
-        padding: 10px;
-        font-size: 1rem;
-        text-align: center;
-      }
-
-      .display-screen h2 {
-        font-size: 4rem; /* 手機版數字縮小 */
-      }
+      .nav-btn { padding: 8px 10px; font-size: 0.9rem; margin-bottom: 5px; }
+      .display-screen h2 { font-size: 4rem; }
+      .clock-display { font-size: 4rem !important; }
+      .stopwatch-display { font-size: 3.5rem !important; }
+      .world-clock-card { width: 45%; min-width: 150px; }
+      .add-clock-row { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
   <nav class="sidebar">
-    <h2 class="logo">🛠️ 工具箱</h2>
+    <h2 class="logo">大耳狗工具箱</h2>
     <button class="nav-btn active" onclick="showTool('home', this)">🏠 首頁</button>
-    <button class="nav-btn" onclick="showTool('counter', this)">🔢 計數器</button>
     <button class="nav-btn" onclick="showTool('pomodoro', this)">🍅 番茄鐘</button>
+    <button class="nav-btn" onclick="showTool('timeAnnouncer', this)">🔊 報時</button>
+    <button class="nav-btn" onclick="showTool('stopwatch', this)">⏱️ 碼錶</button>
+    <button class="nav-btn" onclick="showTool('counter', this)">🔢 計數器</button>
+    <button class="nav-btn" onclick="showTool('worldTime', this)">🌎 世界</button>
   </nav>
 
   <main class="content">
     
     <section id="home" class="tool-section active">
-      <h1>歡迎來到實用工具箱</h1>
+      <h1>歡迎來到大耳狗工具箱 🐾</h1>
       <br>
-      <p>請從選單選擇一個工具開始使用！</p>
-      <br>
-      <p>💡 提示：你可以將這個網頁加入手機主畫面，當作 App 使用。</p>
+      <p style="color: #555; font-size: 1.2rem; font-weight: bold;">請從左側選單選擇一個工具開始使用！</p>
+    </section>
+
+    <section id="pomodoro" class="tool-section">
+      <h1>專注番茄鐘</h1>
+      <div class="mode-tabs">
+        <button class="mode-btn active" onclick="setMode(25, this)">番茄鐘</button>
+        <button class="mode-btn" onclick="setMode(5, this)">短休息</button>
+        <button class="mode-btn" onclick="setMode(10, this)">長休息</button>
+        <div style="display: flex; align-items: center; gap: 5px;">
+           <input type="number" id="customTimeInput" class="custom-time-input" placeholder="分" min="1">
+           <button class="mode-btn" onclick="setCustomMode(this)">自訂</button>
+        </div>
+      </div>
+      <div class="display-screen"><h2 id="timeDisplay">25:00</h2></div>
+      <div class="btn-group">
+        <button id="pomoActionBtn" class="action-btn" onclick="toggleTimer()">開始</button>
+        <button class="danger-btn" onclick="resetTimer()">重置</button>
+      </div>
+    </section>
+
+    <section id="timeAnnouncer" class="tool-section">
+      <h1>大耳狗報時台 🔊</h1>
+      <div class="display-screen"><h2 id="realTimeDisplay" class="clock-display">00:00</h2></div>
+      <div class="btn-group">
+        <button class="action-btn" onclick="announceTime()">🔊 聽聽現在幾點</button>
+      </div>
+    </section>
+
+    <section id="stopwatch" class="tool-section">
+      <h1>精準碼錶 ⏱️</h1>
+      <div class="display-screen"><h2 id="stopwatchDisplay" class="stopwatch-display">00:00.00</h2></div>
+      <div class="btn-group">
+        <button id="swActionBtn" class="action-btn" onclick="toggleStopwatch()">開始</button>
+        <button class="danger-btn" onclick="resetStopwatch()">重置</button>
+      </div>
     </section>
 
     <section id="counter" class="tool-section">
-      <h1>計數器</h1>
-      <div class="display-screen">
-        <h2 id="countDisplay">0</h2>
-      </div>
+      <h1>可愛計數器</h1>
+      <div class="display-screen"><h2 id="countDisplay">0</h2></div>
       <div class="btn-group">
         <button class="action-btn" onclick="changeCount(1)">+1</button>
         <button class="action-btn" onclick="changeCount(-1)">-1</button>
@@ -228,23 +256,18 @@
       </div>
     </section>
 
-    <section id="pomodoro" class="tool-section">
-      <h1>專注番茄鐘</h1>
+    <section id="worldTime" class="tool-section">
+      <h1>大耳狗世界時鐘 🌎</h1>
+      <p style="color: #555; margin-top: 5px; font-weight: bold;">選擇你想查詢的國家，加到你的時鐘牆上🐾</p>
       
-      <div class="mode-tabs">
-        <button class="mode-btn active" onclick="setMode(25, this)">番茄鐘</button>
-        <button class="mode-btn" onclick="setMode(5, this)">短休息</button>
-        <button class="mode-btn" onclick="setMode(10, this)">長休息</button>
+      <div class="add-clock-row">
+        <select id="countrySelect" class="custom-select">
+          </select>
+        <button class="action-btn" onclick="addWorldClock()">➕ 加入時鐘</button>
       </div>
 
-      <div class="display-screen">
-        <h2 id="timeDisplay">25:00</h2>
-      </div>
-
-      <div class="btn-group">
-        <button id="pomoActionBtn" class="action-btn" onclick="toggleTimer()">開始</button>
-        <button class="danger-btn" onclick="resetTimer()">重置</button>
-      </div>
+      <div class="world-clocks-container" id="worldClocksContainer">
+        </div>
     </section>
 
   </main>
@@ -252,128 +275,227 @@
   <script>
     // --- 系統 1：畫面切換邏輯 ---
     function showTool(toolId, clickedButton) {
-      // 隱藏所有內容區塊
-      const sections = document.querySelectorAll('.tool-section');
-      sections.forEach(section => {
-        section.classList.remove('active');
-      });
-      
-      // 顯示被點選的內容區塊
+      document.querySelectorAll('.tool-section').forEach(section => section.classList.remove('active'));
       document.getElementById(toolId).classList.add('active');
-
-      // 更新左側選單的按鈕顏色狀態
-      const buttons = document.querySelectorAll('.nav-btn');
-      buttons.forEach(btn => {
-        btn.classList.remove('active');
-      });
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
       clickedButton.classList.add('active');
     }
 
-    // --- 系統 2：計數器邏輯 ---
-    let currentCount = 0;
-
-    function changeCount(amount) {
-      currentCount += amount;
-      document.getElementById('countDisplay').innerText = currentCount;
-    }
-
-    function resetCount() {
-      currentCount = 0;
-      document.getElementById('countDisplay').innerText = currentCount;
-    }
-
-    // --- 系統 3：番茄鐘邏輯 (Piliapp 版) ---
-    let currentModeTime = 25 * 60; // 預設 25 分鐘
+    // --- 系統 2：番茄鐘邏輯 ---
+    let currentModeTime = 25 * 60; 
     let timeLeft = currentModeTime; 
     let timerInterval = null;
     let isRunning = false; 
 
-    // 更新畫面與網頁標題
     function updateTimeDisplay() {
       let minutes = Math.floor(timeLeft / 60);
       let seconds = timeLeft % 60;
-      
       if (minutes < 10) minutes = '0' + minutes;
       if (seconds < 10) seconds = '0' + seconds;
-      
-      const timeString = `${minutes}:${seconds}`;
-      
-      // 更新畫面數字
-      document.getElementById('timeDisplay').innerText = timeString;
-      
-      // 同步更新網頁標籤標題
-      if (isRunning) {
-        document.title = `${timeString} - 番茄鐘`;
-      } else {
-        document.title = "我的實用工具箱";
-      }
+      document.getElementById('timeDisplay').innerText = `${minutes}:${seconds}`;
     }
 
-    // 切換模式 (25分 / 5分 / 10分)
     function setMode(minutes, clickedBtn) {
-      stopTimer(); // 停止目前計時
-      
-      currentModeTime = minutes * 60;
-      timeLeft = currentModeTime;
-      updateTimeDisplay();
-      
-      // 更新按鈕顏色
-      const modeBtns = document.querySelectorAll('.mode-btn');
-      modeBtns.forEach(btn => btn.classList.remove('active'));
+      stopTimer(); 
+      currentModeTime = minutes * 60; timeLeft = currentModeTime; updateTimeDisplay();
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
       clickedBtn.classList.add('active');
-      
-      // 恢復開始按鈕狀態
-      const actionBtn = document.getElementById('pomoActionBtn');
-      actionBtn.innerText = "開始";
-      actionBtn.style.backgroundColor = "#5865f2";
+      document.getElementById('pomoActionBtn').innerText = "開始";
+      document.getElementById('pomoActionBtn').style.backgroundColor = "#87ceeb"; 
     }
 
-    // 切換開始與暫停
+    function setCustomMode(clickedBtn) {
+      const customMinutes = parseInt(document.getElementById('customTimeInput').value);
+      if (isNaN(customMinutes) || customMinutes <= 0) return alert("請輸入大於 0 的數字喔🐾");
+      setMode(customMinutes, clickedBtn);
+    }
+
     function toggleTimer() {
       const actionBtn = document.getElementById('pomoActionBtn');
-
       if (isRunning) {
-        stopTimer();
-        actionBtn.innerText = "繼續";
-        actionBtn.style.backgroundColor = "#5865f2"; // 恢復藍色
+        stopTimer(); actionBtn.innerText = "繼續"; actionBtn.style.backgroundColor = "#87ceeb"; 
       } else {
-        startTimer();
-        actionBtn.innerText = "暫停";
-        actionBtn.style.backgroundColor = "#e6a822"; // 橘黃色
+        startTimer(); actionBtn.innerText = "暫停"; actionBtn.style.backgroundColor = "#ffb6c1"; 
       }
     }
 
     function startTimer() {
       isRunning = true;
       timerInterval = setInterval(() => {
-        if (timeLeft > 0) {
-          timeLeft--;
-          updateTimeDisplay();
-        } else {
-          stopTimer();
-          alert("時間到！");
+        if (timeLeft > 0) { timeLeft--; updateTimeDisplay(); } 
+        else {
+          stopTimer(); alert("時間到！大耳狗提醒你要休息囉 🐾");
           document.getElementById('pomoActionBtn').innerText = "開始";
-          document.getElementById('pomoActionBtn').style.backgroundColor = "#5865f2";
+          document.getElementById('pomoActionBtn').style.backgroundColor = "#87ceeb";
         }
       }, 1000);
     }
 
-    function stopTimer() {
-      clearInterval(timerInterval);
-      timerInterval = null;
-      isRunning = false;
-      updateTimeDisplay(); // 恢復預設網頁標題
+    function stopTimer() { clearInterval(timerInterval); timerInterval = null; isRunning = false; updateTimeDisplay(); }
+    function resetTimer() {
+      stopTimer(); timeLeft = currentModeTime; updateTimeDisplay(); 
+      document.getElementById('pomoActionBtn').innerText = "開始";
+      document.getElementById('pomoActionBtn').style.backgroundColor = "#87ceeb";
     }
 
-    function resetTimer() {
-      stopTimer(); 
-      timeLeft = currentModeTime; 
-      updateTimeDisplay(); 
-      
-      const actionBtn = document.getElementById('pomoActionBtn');
-      actionBtn.innerText = "開始";
-      actionBtn.style.backgroundColor = "#5865f2";
+    // --- 系統 3：報時台邏輯 ---
+    function announceTime() {
+      if ('speechSynthesis' in window) {
+        const now = new Date();
+        const textToSpeak = `下面音響，現在時間，${now.getHours()}點，${now.getMinutes()}分`;
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = 'zh-TW'; utterance.rate = 1.1; utterance.pitch = 1.5;    
+        window.speechSynthesis.speak(utterance);
+      } else { alert("你的瀏覽器不支援語音功能🐾"); }
     }
+
+    // --- 系統 4：碼錶邏輯 ---
+    let stopwatchTime = 0; 
+    let swInterval = null;
+    let isSwRunning = false;
+
+    function updateStopwatchDisplay() {
+      let minutes = Math.floor(stopwatchTime / 6000);
+      let seconds = Math.floor((stopwatchTime % 6000) / 100);
+      let centiseconds = stopwatchTime % 100;
+      
+      let m = minutes < 10 ? '0' + minutes : minutes;
+      let s = seconds < 10 ? '0' + seconds : seconds;
+      let ms = centiseconds < 10 ? '0' + centiseconds : centiseconds;
+      
+      document.getElementById('stopwatchDisplay').innerText = `${m}:${s}.${ms}`;
+    }
+
+    function toggleStopwatch() {
+      const btn = document.getElementById('swActionBtn');
+      if (isSwRunning) {
+        clearInterval(swInterval);
+        isSwRunning = false;
+        btn.innerText = "繼續";
+        btn.style.backgroundColor = "#87ceeb";
+      } else {
+        isSwRunning = true;
+        swInterval = setInterval(() => {
+          stopwatchTime++;
+          updateStopwatchDisplay();
+        }, 10); 
+        btn.innerText = "暫停";
+        btn.style.backgroundColor = "#ffb6c1";
+      }
+    }
+
+    function resetStopwatch() {
+      clearInterval(swInterval);
+      isSwRunning = false;
+      stopwatchTime = 0;
+      updateStopwatchDisplay();
+      const btn = document.getElementById('swActionBtn');
+      btn.innerText = "開始";
+      btn.style.backgroundColor = "#87ceeb";
+    }
+
+    // --- 系統 5：計數器邏輯 ---
+    let currentCount = 0;
+    function changeCount(amount) {
+      currentCount += amount;
+      document.getElementById('countDisplay').innerText = currentCount;
+    }
+    function resetCount() {
+      currentCount = 0;
+      document.getElementById('countDisplay').innerText = currentCount;
+    }
+
+    // --- 系統 6：世界時間邏輯 ---
+    const timezoneData = [
+      { id: 'Asia/Taipei', name: '🇹🇼 台灣' },
+      { id: 'Asia/Tokyo', name: '🇯🇵 東京' },
+      { id: 'Asia/Seoul', name: '🇰🇷 首爾' },
+      { id: 'Asia/Bangkok', name: '🇹🇭 曼谷' },
+      { id: 'Asia/Ho_Chi_Minh', name: '🇻🇳 越南' },
+      { id: 'Asia/Jakarta', name: '🇮🇩 雅加達' },
+      { id: 'Asia/Singapore', name: '🇸🇬 新加坡' },
+      { id: 'Asia/Dubai', name: '🇦🇪 杜拜' },
+      { id: 'Europe/London', name: '🇬🇧 倫敦' },
+      { id: 'Europe/Paris', name: '🇫🇷 巴黎' },
+      { id: 'Europe/Berlin', name: '🇩🇪 柏林' },
+      { id: 'America/New_York', name: '🇺🇸 紐約' },
+      { id: 'America/Los_Angeles', name: '🇺🇸 洛杉磯' },
+      { id: 'America/Toronto', name: '🇨🇦 多倫多' },
+      { id: 'America/Sao_Paulo', name: '🇧🇷 聖保羅' },
+      { id: 'Australia/Sydney', name: '🇦🇺 雪梨' },
+      { id: 'Pacific/Auckland', name: '🇳🇿 奧克蘭' }
+    ];
+
+    let activeClocks = ['Asia/Taipei', 'Asia/Tokyo', 'Europe/London', 'America/New_York'];
+
+    function initDropdown() {
+      const selectMenu = document.getElementById('countrySelect');
+      timezoneData.forEach(tz => {
+        const option = document.createElement('option');
+        option.value = tz.id; option.innerText = tz.name;
+        selectMenu.appendChild(option);
+      });
+    }
+
+    function renderWorldClocks() {
+      const container = document.getElementById('worldClocksContainer');
+      container.innerHTML = ''; 
+
+      activeClocks.forEach(tzId => {
+        const tzInfo = timezoneData.find(item => item.id === tzId);
+        if (!tzInfo) return; 
+        const safeId = tzId.replace('/', '-'); 
+
+        container.innerHTML += `
+          <div class="world-clock-card">
+            <button class="remove-clock-btn" onclick="removeClock('${tzId}')">✖</button>
+            <div class="world-city">${tzInfo.name}</div>
+            <div class="world-date" id="date-${safeId}">加載中...</div>
+            <div class="world-time" id="time-${safeId}">00:00</div>
+          </div>
+        `;
+      });
+      updateAllRealTimeClocks();
+    }
+
+    function addWorldClock() {
+      const selectedTz = document.getElementById('countrySelect').value;
+      if (activeClocks.includes(selectedTz)) {
+        alert("這個國家的時鐘已經在牆上囉🐾！"); return;
+      }
+      activeClocks.push(selectedTz); 
+      renderWorldClocks();           
+    }
+
+    function removeClock(tzIdToRemove) {
+      activeClocks = activeClocks.filter(tzId => tzId !== tzIdToRemove);
+      renderWorldClocks(); 
+    }
+
+    function updateAllRealTimeClocks() {
+      const now = new Date();
+      
+      let h = now.getHours(), m = now.getMinutes();
+      document.getElementById('realTimeDisplay').innerText = `${h<10?'0'+h:h}:${m<10?'0'+m:m}`;
+
+      const timeOpts = { hour: '2-digit', minute: '2-digit', hour12: false };
+      const dateOpts = { month: 'short', day: 'numeric', weekday: 'short' };
+
+      activeClocks.forEach(tzId => {
+        const safeId = tzId.replace('/', '-');
+        const timeEl = document.getElementById(`time-${safeId}`);
+        const dateEl = document.getElementById(`date-${safeId}`);
+        
+        if (timeEl && dateEl) {
+          timeEl.innerText = now.toLocaleTimeString('zh-TW', { ...timeOpts, timeZone: tzId });
+          dateEl.innerText = now.toLocaleDateString('zh-TW', { ...dateOpts, timeZone: tzId });
+        }
+      });
+    }
+
+    initDropdown();          
+    renderWorldClocks();     
+    setInterval(updateAllRealTimeClocks, 1000); 
   </script>
 </body>
 </html>
