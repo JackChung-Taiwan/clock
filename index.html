@@ -1,54 +1,18 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的實用工具箱</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <nav class="sidebar">
-    <h2 class="logo">🛠️ 工具箱</h2>
-    <button class="nav-btn active" onclick="showTool('home', this)">🏠 首頁</button>
-    <button class="nav-btn" onclick="showTool('counter', this)">🔢 計數器</button>
-    <button class="nav-btn" onclick="showTool('pomodoro', this)">🍅 番茄鐘</button>
-  </nav>
-
-  <main class="content">
-    
-    <section id="home" class="tool-section active">
-      <h1>歡迎來到實用工具箱</h1>
-      <p>請從選單選擇一個工具開始使用！</p>
-      <p>💡 提示：你可以將這個網頁加入手機主畫面，當作 App 使用。</p>
-    </section>
-
-    <section id="counter" class="tool-section">
-      <h1>計數器</h1>
-      <div class="display-screen">
-        <h2 id="countDisplay">0</h2>
-      </div>
-      <div class="btn-group">
-        <button class="action-btn" onclick="changeCount(1)">+1</button>
-        <button class="action-btn" onclick="changeCount(-1)">-1</button>
-        <button class="danger-btn" onclick="resetCount()">歸零</button>
-      </div>
-    </section>
-
-    <section id="pomodoro" class="tool-section">
+<section id="pomodoro" class="tool-section">
       <h1>專注番茄鐘</h1>
+      
+      <div class="mode-tabs">
+        <button class="mode-btn active" onclick="setMode(25, this)">番茄鐘</button>
+        <button class="mode-btn" onclick="setMode(5, this)">短休息</button>
+        <button class="mode-btn" onclick="setMode(10, this)">長休息</button>
+      </div>
+
       <div class="display-screen">
         <h2 id="timeDisplay">25:00</h2>
       </div>
+
       <div class="btn-group">
-        <button class="action-btn" onclick="startTimer()">開始</button>
-        <button class="danger-btn" onclick="stopTimer()">暫停</button>
-        <button class="action-btn" onclick="resetTimer()">重置</button>
+        <button id="pomoActionBtn" class="action-btn" onclick="toggleTimer()">開始</button>
+        <button class="danger-btn" onclick="resetTimer()">重置</button>
       </div>
     </section>
-
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
