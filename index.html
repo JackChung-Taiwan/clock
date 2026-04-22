@@ -1,4 +1,234 @@
-<section id="pomodoro" class="tool-section">
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的實用工具箱</title>
+  
+  <style>
+    /* 基本設定與深色主題 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #1e1e24; /* 深灰色背景 */
+      color: #ffffff;
+    }
+
+    /* --- 側邊欄設計 --- */
+    .sidebar {
+      width: 250px;
+      background-color: #2b2b36;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    }
+
+    .logo {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #444;
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
+
+    .nav-btn {
+      background: none;
+      color: #bbb;
+      border: none;
+      text-align: left;
+      padding: 15px 20px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background-color: #3f3f4e;
+      color: white;
+    }
+
+    .nav-btn.active {
+      background-color: #5865f2; /* 選擇時的亮藍色 */
+      color: white;
+      font-weight: bold;
+    }
+
+    /* --- 主要內容區設計 --- */
+    .content {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow-y: auto;
+    }
+
+    .tool-section {
+      display: none; /* 預設隱藏所有工具 */
+      animation: fadeIn 0.5s ease; /* 簡單的淡入動畫 */
+    }
+
+    .tool-section.active {
+      display: block; /* 只顯示有 active 的工具 */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- 工具共用樣式 (螢幕與按鈕) --- */
+    .display-screen {
+      background-color: #2b2b36;
+      padding: 40px;
+      border-radius: 15px;
+      margin: 20px 0;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .display-screen h2 {
+      font-size: 6rem;
+      margin: 0;
+      letter-spacing: 2px;
+      color: #00ffcc; /* 螢光綠數字 */
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .action-btn {
+      background-color: #5865f2;
+      color: white;
+    }
+
+    .action-btn:hover {
+      background-color: #4752c4;
+    }
+
+    .danger-btn {
+      background-color: #ed4245;
+      color: white;
+    }
+
+    .danger-btn:hover {
+      background-color: #c93639;
+    }
+
+    /* --- 番茄鐘模式切換按鈕 --- */
+    .mode-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .mode-btn {
+      background-color: #3f3f4e;
+      color: #bbb;
+      padding: 8px 16px;
+      font-size: 1rem;
+      border-radius: 20px; /* 圓角膠囊形狀 */
+    }
+
+    .mode-btn:hover {
+      background-color: #4f4f62;
+    }
+
+    .mode-btn.active {
+      background-color: #00ffcc;
+      color: #1e1e24;
+    }
+
+    /* --- 手機響應式設計 (RWD) --- */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px;
+        height: auto;
+      }
+      
+      .logo {
+        display: none; /* 手機版隱藏 Logo */
+      }
+
+      .nav-btn {
+        padding: 10px;
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .display-screen h2 {
+        font-size: 4rem; /* 手機版數字縮小 */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <h2 class="logo">🛠️ 工具箱</h2>
+    <button class="nav-btn active" onclick="showTool('home', this)">🏠 首頁</button>
+    <button class="nav-btn" onclick="showTool('counter', this)">🔢 計數器</button>
+    <button class="nav-btn" onclick="showTool('pomodoro', this)">🍅 番茄鐘</button>
+  </nav>
+
+  <main class="content">
+    
+    <section id="home" class="tool-section active">
+      <h1>歡迎來到實用工具箱</h1>
+      <br>
+      <p>請從選單選擇一個工具開始使用！</p>
+      <br>
+      <p>💡 提示：你可以將這個網頁加入手機主畫面，當作 App 使用。</p>
+    </section>
+
+    <section id="counter" class="tool-section">
+      <h1>計數器</h1>
+      <div class="display-screen">
+        <h2 id="countDisplay">0</h2>
+      </div>
+      <div class="btn-group">
+        <button class="action-btn" onclick="changeCount(1)">+1</button>
+        <button class="action-btn" onclick="changeCount(-1)">-1</button>
+        <button class="danger-btn" onclick="resetCount()">歸零</button>
+      </div>
+    </section>
+
+    <section id="pomodoro" class="tool-section">
       <h1>專注番茄鐘</h1>
       
       <div class="mode-tabs">
@@ -16,3 +246,134 @@
         <button class="danger-btn" onclick="resetTimer()">重置</button>
       </div>
     </section>
+
+  </main>
+
+  <script>
+    // --- 系統 1：畫面切換邏輯 ---
+    function showTool(toolId, clickedButton) {
+      // 隱藏所有內容區塊
+      const sections = document.querySelectorAll('.tool-section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // 顯示被點選的內容區塊
+      document.getElementById(toolId).classList.add('active');
+
+      // 更新左側選單的按鈕顏色狀態
+      const buttons = document.querySelectorAll('.nav-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      clickedButton.classList.add('active');
+    }
+
+    // --- 系統 2：計數器邏輯 ---
+    let currentCount = 0;
+
+    function changeCount(amount) {
+      currentCount += amount;
+      document.getElementById('countDisplay').innerText = currentCount;
+    }
+
+    function resetCount() {
+      currentCount = 0;
+      document.getElementById('countDisplay').innerText = currentCount;
+    }
+
+    // --- 系統 3：番茄鐘邏輯 (Piliapp 版) ---
+    let currentModeTime = 25 * 60; // 預設 25 分鐘
+    let timeLeft = currentModeTime; 
+    let timerInterval = null;
+    let isRunning = false; 
+
+    // 更新畫面與網頁標題
+    function updateTimeDisplay() {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      
+      if (minutes < 10) minutes = '0' + minutes;
+      if (seconds < 10) seconds = '0' + seconds;
+      
+      const timeString = `${minutes}:${seconds}`;
+      
+      // 更新畫面數字
+      document.getElementById('timeDisplay').innerText = timeString;
+      
+      // 同步更新網頁標籤標題
+      if (isRunning) {
+        document.title = `${timeString} - 番茄鐘`;
+      } else {
+        document.title = "我的實用工具箱";
+      }
+    }
+
+    // 切換模式 (25分 / 5分 / 10分)
+    function setMode(minutes, clickedBtn) {
+      stopTimer(); // 停止目前計時
+      
+      currentModeTime = minutes * 60;
+      timeLeft = currentModeTime;
+      updateTimeDisplay();
+      
+      // 更新按鈕顏色
+      const modeBtns = document.querySelectorAll('.mode-btn');
+      modeBtns.forEach(btn => btn.classList.remove('active'));
+      clickedBtn.classList.add('active');
+      
+      // 恢復開始按鈕狀態
+      const actionBtn = document.getElementById('pomoActionBtn');
+      actionBtn.innerText = "開始";
+      actionBtn.style.backgroundColor = "#5865f2";
+    }
+
+    // 切換開始與暫停
+    function toggleTimer() {
+      const actionBtn = document.getElementById('pomoActionBtn');
+
+      if (isRunning) {
+        stopTimer();
+        actionBtn.innerText = "繼續";
+        actionBtn.style.backgroundColor = "#5865f2"; // 恢復藍色
+      } else {
+        startTimer();
+        actionBtn.innerText = "暫停";
+        actionBtn.style.backgroundColor = "#e6a822"; // 橘黃色
+      }
+    }
+
+    function startTimer() {
+      isRunning = true;
+      timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+          timeLeft--;
+          updateTimeDisplay();
+        } else {
+          stopTimer();
+          alert("時間到！");
+          document.getElementById('pomoActionBtn').innerText = "開始";
+          document.getElementById('pomoActionBtn').style.backgroundColor = "#5865f2";
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+      updateTimeDisplay(); // 恢復預設網頁標題
+    }
+
+    function resetTimer() {
+      stopTimer(); 
+      timeLeft = currentModeTime; 
+      updateTimeDisplay(); 
+      
+      const actionBtn = document.getElementById('pomoActionBtn');
+      actionBtn.innerText = "開始";
+      actionBtn.style.backgroundColor = "#5865f2";
+    }
+  </script>
+</body>
+</html>
